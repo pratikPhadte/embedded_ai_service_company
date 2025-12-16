@@ -80,6 +80,7 @@ if (sendEmailBtn) {
         const contactHint = document.getElementById('contactHint');
         const emailInput = document.getElementById('email');
         const phoneInput = document.getElementById('phone');
+        const formSuccess = document.getElementById('formSuccess');
 
         // Reset error states
         contactHint.classList.remove('error');
@@ -108,10 +109,39 @@ if (sendEmailBtn) {
         const img = new Image();
         img.src = `${GOOGLE_SHEET_URL}?${params.toString()}`;
 
-        // Small delay to ensure request is sent before mailto redirect
+        // Small delay to ensure request is sent
         await new Promise(resolve => setTimeout(resolve, 500));
 
-        // Open email client
+        // Show success message
+        formSuccess.classList.add('show');
+
+        // Reset form
+        document.getElementById('name').value = '';
+        document.getElementById('company').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('message').value = '';
+
+        // Hide success message after 10 seconds
+        setTimeout(() => {
+            formSuccess.classList.remove('show');
+        }, 10000);
+    });
+}
+
+// ===== Mailto Button - Opens Email Client =====
+const mailtoBtn = document.getElementById('mailtoBtn');
+
+if (mailtoBtn) {
+    mailtoBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const company = document.getElementById('company').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const message = document.getElementById('message').value.trim();
+
         const subject = encodeURIComponent('Ephemeral.ai - Project Inquiry');
 
         let body = '';
