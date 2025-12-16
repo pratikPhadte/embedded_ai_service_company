@@ -64,49 +64,29 @@ animateElements.forEach((el, index) => {
     fadeInObserver.observe(el);
 });
 
-// ===== Form Handling with Formspree =====
-const contactForm = document.getElementById('contactForm');
+// ===== Contact Form - Opens Email Client =====
+const sendEmailBtn = document.getElementById('sendEmailBtn');
 
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
+if (sendEmailBtn) {
+    sendEmailBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
+        const name = document.getElementById('name').value.trim();
+        const company = document.getElementById('company').value.trim();
+        const message = document.getElementById('message').value.trim();
 
-        // Show loading state
-        submitBtn.textContent = 'Sending...';
-        submitBtn.disabled = true;
+        const subject = encodeURIComponent('Ephemeral.ai - Project Inquiry');
 
-        try {
-            const formData = new FormData(contactForm);
-            const response = await fetch(contactForm.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
+        let body = '';
+        if (name) body += `Name: ${name}\n`;
+        if (company) body += `Company: ${company}\n`;
+        if (name || company) body += '\n';
+        body += message || 'I would like to discuss a project with you.';
 
-            if (response.ok) {
-                // Show success state
-                submitBtn.textContent = 'Message Sent!';
-                submitBtn.style.background = '#22c55e';
-                contactForm.reset();
-            } else {
-                throw new Error('Form submission failed');
-            }
-        } catch (error) {
-            submitBtn.textContent = 'Error - Try Again';
-            submitBtn.style.background = '#ef4444';
-        }
+        const encodedBody = encodeURIComponent(body);
+        const mailtoLink = `mailto:pratikphadte1910@gmail.com?subject=${subject}&body=${encodedBody}`;
 
-        // Reset button after delay
-        setTimeout(() => {
-            submitBtn.textContent = originalText;
-            submitBtn.style.background = '';
-            submitBtn.disabled = false;
-        }, 3000);
+        window.location.href = mailtoLink;
     });
 }
 
