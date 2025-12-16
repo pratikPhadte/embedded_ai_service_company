@@ -66,7 +66,7 @@ animateElements.forEach((el, index) => {
 
 // ===== Contact Form - Saves to Google Sheet & Opens Email Client =====
 const sendEmailBtn = document.getElementById('sendEmailBtn');
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwtuk7HnOBAnEBj10aAHFsC7neuFKDgyExzjdO-fsX3pVdpPXOioVkLu_djHY6YE7aOkg/exec';
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyeyF842-zrqcdN6PkAOlVqPq-HZ3vqPUJR6RUSsKxa-QOQ9jfAMzdwfb49yl_vswWCAA/exec';
 
 if (sendEmailBtn) {
     sendEmailBtn.addEventListener('click', async (e) => {
@@ -76,18 +76,16 @@ if (sendEmailBtn) {
         const company = document.getElementById('company').value.trim();
         const message = document.getElementById('message').value.trim();
 
-        // Save to Google Sheet (don't wait for response)
-        fetch(GOOGLE_SHEET_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: name || 'Not provided',
-                company: company || 'Not provided',
-                message: message || 'No message'
-            })
+        // Save to Google Sheet using URL parameters (works with CORS)
+        const params = new URLSearchParams({
+            name: name || 'Not provided',
+            company: company || 'Not provided',
+            message: message || 'No message'
+        });
+
+        fetch(`${GOOGLE_SHEET_URL}?${params.toString()}`, {
+            method: 'GET',
+            mode: 'no-cors'
         }).catch(() => {}); // Silently fail if sheet save fails
 
         // Open email client
