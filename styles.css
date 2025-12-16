@@ -11,6 +11,15 @@
     --black: #0a0a0a;
     --black-soft: #171717;
 
+    /* Brand colors from logo */
+    --navy: #1a1f3d;
+    --navy-light: #2d3561;
+    --coral: #e8846e;
+    --coral-light: #f5a896;
+    --peach: #f8c4b4;
+    --gradient-brand: linear-gradient(135deg, var(--navy) 0%, var(--coral) 50%, var(--peach) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--coral) 0%, var(--peach) 100%);
+
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -295,15 +304,11 @@ img {
 .logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--black);
 }
 
-.logo-icon {
-    font-size: 1.5rem;
-    color: var(--gray-500);
+.logo-img {
+    height: 32px;
+    width: auto;
 }
 
 .nav-links {
@@ -340,7 +345,7 @@ img {
 
 .nav-cta {
     padding: 0.625rem 1.25rem;
-    background: var(--black);
+    background: var(--navy);
     color: var(--white-pure);
     border-radius: 6px;
     font-size: 0.875rem;
@@ -348,7 +353,7 @@ img {
 }
 
 .nav-cta:hover {
-    background: var(--black-soft);
+    background: var(--navy-light);
     transform: translateY(-1px);
 }
 
@@ -384,25 +389,26 @@ img {
 }
 
 .btn-primary {
-    background: var(--black);
+    background: var(--navy);
     color: var(--white-pure);
 }
 
 .btn-primary:hover {
-    background: var(--black-soft);
+    background: var(--navy-light);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
 
 .btn-secondary {
     background: transparent;
-    color: var(--black);
+    color: var(--navy);
     border: 1px solid var(--gray-200);
 }
 
 .btn-secondary:hover {
-    border-color: var(--black);
-    background: rgba(0, 0, 0, 0.02);
+    border-color: var(--coral);
+    color: var(--coral);
+    background: rgba(232, 132, 110, 0.05);
 }
 
 .btn-full {
@@ -506,7 +512,7 @@ img {
 .chip-core {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, var(--black) 0%, var(--gray-500) 100%);
+    background: var(--gradient-brand);
     border-radius: 12px;
     position: relative;
     z-index: 3;
@@ -527,7 +533,7 @@ img {
 
 .chip-ring {
     position: absolute;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(232, 132, 110, 0.3);
     border-radius: 50%;
 }
 
@@ -558,7 +564,7 @@ img {
     position: absolute;
     width: 8px;
     height: 8px;
-    background: var(--black);
+    background: var(--coral);
     border-radius: 50%;
     animation: pulse-dot 2s ease-in-out infinite;
 }
@@ -764,7 +770,7 @@ img {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: var(--black);
+    background: var(--gradient-brand);
     animation: wave 2s ease-in-out infinite;
 }
 
@@ -783,7 +789,7 @@ img {
 
 .audio-bars span {
     width: 4px;
-    background: var(--black);
+    background: var(--coral);
     border-radius: 2px;
     animation: audio-bar 1s ease-in-out infinite;
 }
@@ -803,7 +809,7 @@ img {
 .scan-line {
     width: 100%;
     height: 2px;
-    background: var(--black);
+    background: var(--coral);
     position: absolute;
     animation: scan 2s ease-in-out infinite;
 }
@@ -822,7 +828,7 @@ img {
 .gesture-dots span {
     width: 12px;
     height: 12px;
-    background: var(--black);
+    background: var(--navy);
     border-radius: 50%;
     animation: gesture 1.5s ease-in-out infinite;
 }
@@ -884,8 +890,8 @@ img {
 }
 
 .process-step:hover .step-marker {
-    background: var(--black);
-    border-color: var(--black);
+    background: var(--gradient-brand);
+    border-color: var(--coral);
     color: var(--white-pure);
     transform: scale(1.1);
 }
@@ -905,7 +911,7 @@ img {
 /* ===== Tech Stack Section ===== */
 .tech-stack {
     padding: 6rem 0;
-    background: var(--black);
+    background: var(--navy);
     position: relative;
     z-index: 1;
 }
@@ -937,7 +943,8 @@ img {
 }
 
 .tech-item:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(232, 132, 110, 0.2);
+    border-color: var(--coral);
     color: var(--white-pure);
     transform: translateY(-2px);
 }
@@ -1174,7 +1181,7 @@ img {
 }
 
 .footer-col a:hover {
-    color: var(--black);
+    color: var(--coral);
 }
 
 .footer-bottom {
